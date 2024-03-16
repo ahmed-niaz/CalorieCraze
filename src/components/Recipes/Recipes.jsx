@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import Recipe from "../Recipe/Recipe";
+import PropTypes from 'prop-types'
 const Recipes = ({handleWantToCook}) => {
   const [recipes, setRecipes] = useState([]);
   useEffect(() => {
@@ -16,5 +17,8 @@ const Recipes = ({handleWantToCook}) => {
     </main>
   );
 };
-
+Recipes.propTypes = {
+  handleWantToCook:PropTypes.func,
+  handleRecipeSelection:PropTypes.func,
+}
 export default Recipes;

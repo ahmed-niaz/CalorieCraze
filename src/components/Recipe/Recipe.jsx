@@ -3,7 +3,8 @@ import clock from "../../assets/icon/clock.svg";
 import calorie from "../../assets/icon/calorie.svg";
 import Ingredients from "../Ingredients/Ingredients";
 
-const Recipe = ({ rcips,handleWantToCook }) => {
+
+const Recipe = ({ rcips,handleWantToCook}) => {
   const { image, name, description, preparing_time, calories, ingredients } = rcips;
   const ingredientList = ingredients.list; 
   const ingredientLength = ingredients.length;
@@ -51,6 +52,8 @@ Recipe.propTypes = {
     calories: PropTypes.number.isRequired,
     ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
+  handleWantToCook:PropTypes.func,
+  handleRecipeSelection:PropTypes.func,
 };
 
 export default Recipe;

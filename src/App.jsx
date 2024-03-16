@@ -3,13 +3,23 @@ import Banner from "./components/Banner/Banner";
 import Recipes from "./components/Recipes/Recipes";
 import Cook from "./components/Cook/Cook";
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
-  const [cook,setCook] = useState([]);
-  const handleWantToCook = (ck) =>{
-    const newCook = [...cook,ck]
-    setCook(newCook)
-  }
+  const [cook, setCook] = useState([]);
+  const handleWantToCook = (ck) => {
+    console.log(ck);
+    const selectAlready = cook.find((c) => (c.recipe_id === ck.recipe_id));
+
+    if (!selectAlready) {
+      const newCook = [...cook, ck];
+      setCook(newCook);
+      toast.success("Want to cook");
+    }else{
+      toast.warn("Already prepare for cooking");
+    }
+  };
   return (
     <main className="container mx-auto font-lexend">
       <Navbar />
@@ -24,10 +34,11 @@ const App = () => {
           </p>
         </div>
         <div className="mt-8 flex gap-4 flex-col lg:flex-row">
-          <Recipes handleWantToCook={handleWantToCook}/>
-          <Cook cook = {cook}/>
+          <Recipes handleWantToCook={handleWantToCook} />
+          <Cook cook={cook} />
         </div>
       </div>
+      <ToastContainer />
     </main>
   );
 };
