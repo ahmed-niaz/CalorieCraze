@@ -3,21 +3,21 @@ import clock from "../../assets/icon/clock.svg";
 import calorie from "../../assets/icon/calorie.svg";
 import Ingredients from "../Ingredients/Ingredients";
 
-const Recipe = ({ rcips }) => {
+const Recipe = ({ rcips,handleWantToCook }) => {
   const { image, name, description, preparing_time, calories, ingredients } = rcips;
-  const ingredientList = ingredients.list; // Accessing the list array
+  const ingredientList = ingredients.list; 
   const ingredientLength = ingredients.length;
   return (
     <main>
-      <div className="card w-full bg-base-100 shadow-xl">
-        <img className="h-[280px]" src={image} alt="" />
+      <div className="card w-full bg-base-100 shadow-xl border-2 ">
+        <img className="h-[280px] rounded-3xl p-4" src={image} alt="" />
         <div className="card-body">
-          <h2 className="card-title">{name}</h2>
-          <p>{description}</p>
+          <h2 className="card-title font-bold">{name}</h2>
+          <p className="text-[#878787] w-3/4">{description}</p>
           <div className="divider"></div>
-          <p>Ingredients: {ingredientLength}</p>
+          <p className="font-bold text-2xl">Ingredients: {ingredientLength}</p>
           <div>
-            {ingredientList.map((ingredient, idx) => (
+            {ingredientList.slice(0,3).map((ingredient, idx) => (
               <Ingredients key={idx} ingredientList={ingredient} />
             ))}
           </div>
@@ -34,7 +34,7 @@ const Recipe = ({ rcips }) => {
             </div>
           </div>
           <div className="card-actions justify-start">
-            <button className="btn bg-[#0BE58A] rounded-3xl mt-4">Want to Cook</button>
+            <button className="btn bg-[#0BE58A] rounded-3xl mt-4" onClick={()=>handleWantToCook(rcips)}>Want to Cook</button>
           </div>
         </div>
       </div>

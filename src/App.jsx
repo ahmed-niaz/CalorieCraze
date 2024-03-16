@@ -2,10 +2,16 @@ import Navbar from "./components/Navbar/Navbar";
 import Banner from "./components/Banner/Banner";
 import Recipes from "./components/Recipes/Recipes";
 import Cook from "./components/Cook/Cook";
+import { useState } from "react";
 
 const App = () => {
+  const [cook,setCook] = useState([]);
+  const handleWantToCook = (ck) =>{
+    const newCook = [...cook,ck]
+    setCook(newCook)
+  }
   return (
-    <main className="container mx-auto">
+    <main className="container mx-auto font-lexend">
       <Navbar />
       <Banner />
       <div>
@@ -17,9 +23,9 @@ const App = () => {
             cooking skills to new heights!
           </p>
         </div>
-        <div className="mt-8 flex gap-4">
-          <Recipes />
-          <Cook />
+        <div className="mt-8 flex gap-4 flex-col lg:flex-row">
+          <Recipes handleWantToCook={handleWantToCook}/>
+          <Cook cook = {cook}/>
         </div>
       </div>
     </main>
