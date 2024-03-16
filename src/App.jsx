@@ -16,7 +16,7 @@ const App = () => {
       const newCook = [...cook, ck];
       setCook(newCook);
       toast.success("Want to cook");
-    }else{
+    }else{ 
       toast.warn("Already prepare for cooking");
     }
   };
