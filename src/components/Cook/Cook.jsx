@@ -2,24 +2,23 @@ import { useState } from "react";
 import Prepare from "../Prepare/Prepare";
 import PropTypes from "prop-types";
 import ReadyCook from "../ReadyCook/ReadyCook";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const Cook = ({ cook }) => {
   const [insteadCook, setInsteadCook] = useState([]);
   const preparingBtn = (currentCook) => {
     console.log(currentCook);
-    const selectAlready = insteadCook.find((c) => (c.recipe_id == currentCook.recipe_id));
-    if(!selectAlready){
+    const selectAlready = insteadCook.find(
+      (c) => c.recipe_id == currentCook.recipe_id
+    );
+    if (!selectAlready) {
       const newInsteadCook = [...insteadCook, currentCook];
       setInsteadCook(newInsteadCook);
-      toast.success("Currently Cooking");
-    }else{ 
-      toast.error("Cooked");
+      // toast.success("Currently Cooking");
+    } else {
+      //  toast.error("Cooked");
     }
-    
   };
- 
+
   return (
     <main className="w-full lg:w-2/5 p-4 lg:p-0">
       <div className="border-2 rounded-3xl p-6">
@@ -44,7 +43,7 @@ const Cook = ({ cook }) => {
             </table>
           </div>
           {cook.map((ck, idx) => (
-            <Prepare key={idx} prep={ck} preparingBtn={preparingBtn}  />
+            <Prepare key={idx} prep={ck} preparingBtn={preparingBtn} />
           ))}
         </div>
         <h2 className="text-2xl font-bold text-center mt-8">
@@ -67,8 +66,33 @@ const Cook = ({ cook }) => {
         {insteadCook.map((rc, idx) => (
           <ReadyCook rc={rc} key={idx} preparingBtn={preparingBtn} />
         ))}
+        <div className="flex justify-end gap-8"> 
+          <h2 className="text-xl font-bold">
+            Total Time:{" "}
+            {insteadCook.reduce((totalMinutes, currentItem) => {
+              const timeString = currentItem.preparing_time;
+              const numericValue = parseInt(timeString.split(" ")[0]);
+
+              const unit = timeString.split(" ")[1];
+              const minutes =
+                unit === " minutes" ? numericValue : numericValue;
+
+              return totalMinutes + minutes;
+            }, 0)}
+            minutes
+          </h2>
+
+          <h2 className="text-xl font-bold">
+            Total Calories:{" "}
+            {insteadCook.reduce(
+              (totalCalories, currentItem) =>
+                totalCalories + currentItem.calories,
+              0
+            )}{" "}
+            calories
+          </h2>
+        </div>
       </div>
-      <ToastContainer />
     </main>
   );
 };

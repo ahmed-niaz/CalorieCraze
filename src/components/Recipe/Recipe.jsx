@@ -14,7 +14,7 @@ const Recipe = ({ rcips,handleWantToCook}) => {
         <img className="h-[280px] rounded-3xl p-4" src={image} alt="" />
         <div className="card-body">
           <h2 className="card-title font-bold">{name}</h2>
-          <p className="text-[#878787] w-3/4">{description}</p>
+          <p className="text-[#878787] w-full lg:w-3/4">{description}</p>
           <div className="divider"></div>
           <p className="font-bold text-2xl">Ingredients: {ingredientLength}</p>
           <div>
